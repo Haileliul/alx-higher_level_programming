@@ -1,6 +1,4 @@
 #!/usr/bin/node
-const names = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
-
-names.forEach((value) => {
-  console.log(value);
-});
+for (const line of ['C is fun', 'Python is cool', 'Javascript is amazing']) {
+  console.log(line);
+}

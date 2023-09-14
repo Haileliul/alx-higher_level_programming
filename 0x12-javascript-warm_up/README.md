@@ -1,7 +1,5 @@
 # 0x12-javascript-warm_up
-
-## This project I have learned:
-
+In this project, I learnt:
 - How to run a JavaScript script
 - How to create variables and constants
 - What are differences between var, const and let

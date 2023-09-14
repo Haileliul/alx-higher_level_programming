@@ -1,6 +1,3 @@
-$.getJSON('https://swapi.co/api/films/?format=json',
-  function (data) {
-    $.each(data.movies, function (index, movie) {
-      $('UL#list_movies').append('<li>' + movie.title + '</li>');
-    });
-  });
+$.get('https://swapi.co/api/films/?format=json', function (data) {
+  $('UL#list_movies').append(...data.results.map(movie => `<li>${movie.title}</li>`));
+});

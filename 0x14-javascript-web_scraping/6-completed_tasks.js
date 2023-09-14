@@ -1,23 +1,21 @@
 #!/usr/bin/node
+
 const request = require('request');
+
 const url = process.argv[2];
-const myDict = {};
+const out = {};
 
-request(url, function (err, data, body) {
-  if (err) {
-    console.log(err);
-  } else {
-    const response = JSON.parse(body);
-
-    for (let i = 0; i < response.length; i++) {
-      if (response[i].completed === true) {
-        if (myDict[response[i].userId] === undefined) {
-          myDict[response[i].userId] = 1;
-        } else {
-          myDict[response[i].userId] += 1;
-        }
-      }
-    }
+function count (todo) {
+  if (todo.completed) {
+    const userId = todo.userId.toString();
+    out[userId] = out[userId] + 1 || 1;
   }
-  console.log(myDict);
+}
+
+request(url, (error, response, body) => {
+  if (error) throw error;
+  if (response.statusCode === 200) {
+    JSON.parse(body).forEach(count);
+    console.log(out);
+  }
 });

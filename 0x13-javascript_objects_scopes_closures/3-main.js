@@ -6,3 +6,4 @@ r1.print();
 
 const r2 = new Rectangle(10, 5);
 r2.print();
+

@@ -1,24 +1,23 @@
 #!/usr/bin/python3
+"""Script displays all values in states table that match given argument
+Takes four arguments:
+    mysql username
+    mysql password
+    database name
+    name to match
+Connects to default host (localhost) and port (3306)
 """
-Displays all values in the states table of the database hbtn_0e_0_usa
-whose name matches that supplied as argument.
-Usage: ./2-my_filter_states.py <mysql username> \
-                                <mysql password> \
-                                <database name> \
-                                <state name searched>
-"""
-import sys
-import MySQLdb
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(user=sys.argv[1], port=3306, host="localhost",
-                         passwd=sys.argv[2], db=sys.argv[3])
+    from sys import argv
+    import MySQLdb
+    db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
     c = db.cursor()
-    c.execute("SELECT * FROM states WHERE name LIKE '{:s}' ORDER BY \
-    id ASC".format(sys.argv[4]))
-    states = c.fetchall()
-    for state in states:
-        if state[1] == sys.argv[4]:
-            print(state)
+    c.execute("""SELECT * FROM states WHERE name = '{}'\
+            ORDER BY states.id ASC""".format(argv[4]))
+    rows = c.fetchall()
+    for row in rows:
+        if row[1] == argv[4]:
+            print(row)
     c.close()
     db.close()

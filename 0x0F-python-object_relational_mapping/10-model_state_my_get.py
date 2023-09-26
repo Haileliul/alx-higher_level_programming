@@ -1,26 +1,21 @@
 #!/usr/bin/python3
-"""Script prints State object with the name passed as argument
-Takes three arguments
-    mysql username
-    mysql password
-    database name
-Connects to host localhost and default port (3306)
-"""
+"""Script that prints the State object with the name passed as argument from
+the database hbtn_0e_6_usa"""
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+
 if __name__ == "__main__":
-    from sqlalchemy import (create_engine)
-    from sqlalchemy.orm import sessionmaker
-    from model_state import Base, State
-    from sys import argv
-    Session = sessionmaker()
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        argv[1], argv[2], argv[3]), pool_pre_ping=True)
-    session = Session(bind=engine)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format
+                           (sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
     Base.metadata.create_all(engine)
-    instances = session.query(State).filter(State.name == argv[4]).all()
-    if instances:
-        for instance in instances:
-            if instance.name == argv[4]:
-                print("{}".format(instance.id))
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    state = session.query(State).filter_by(name=sys.argv[4]).first()
+    if state:
+        print("{}".format(state.id))
     else:
         print("Not found")
     session.close()

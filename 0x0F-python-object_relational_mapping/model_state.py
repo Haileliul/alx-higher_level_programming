@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""File contains class State and instance Base = declarative_base()"""
+"""Defines a class State"""
+
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -7,14 +9,7 @@ Base = declarative_base()
 
 
 class State(Base):
-    """State class inherits from Base
-
-    Links to MySQL table 'states'
-
-    Attributes:
-        id: column of auto-generated unique integer, can't be NULL, primary key
-        name: column of string with max 128 characters, can't be NULL
-    """
+    """ Class that defines properties of State"""
     __tablename__ = 'states'
-    id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)

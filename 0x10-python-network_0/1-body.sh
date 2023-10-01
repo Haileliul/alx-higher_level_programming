@@ -1,3 +1,3 @@
 #!/bin/bash
-#Sends a request to that URL, and displays the size of the body of the response
+# Get the response body for a given URL for 200 status code responses.
 curl -sL "$1"

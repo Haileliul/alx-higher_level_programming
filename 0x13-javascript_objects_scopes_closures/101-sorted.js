@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const list = require('./101-data').dict;
+const list = require('./101-data.js').dict;
 const sorted = {};
 
 Object.keys(list).forEach(key => {

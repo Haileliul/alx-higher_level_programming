@@ -1,13 +1,6 @@
 #!/usr/bin/node
-const args = process.argv;
-const num1 = parseInt(args[2]);
-const num2 = parseInt(args[3]);
-
-function add(a, b) {
-  console.log(a + b);
-}
-if (isNaN(num1) || isNaN(num2)) {
-  console.log("Note A number");
-} else {
-  add(num1, num2);
-}
+module.exports = {
+  add: function (a, b) {
+    return a + b;
+  }
+};
